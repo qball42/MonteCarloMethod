@@ -56,6 +56,8 @@ public:
 		cout << "E: " << E << "\n";
 	}
 };
+
+// Headers
 double function(Particle* a, Particle* b);
 
 // Calculate the value of our given function using input of two W/Z bosons
@@ -106,12 +108,15 @@ int generatePoints() {
 		if (p[3][0] < 1 && p[3][0] > -1 && p[3][1] < 1 && p[3][1] > -1 && p[3][2] < 1 && p[3][2] > -1) { // Check if momentum falls within acceptable bounds
 			numPoints++;
 			for (int i = 0; i < 4; i++) {
-				p[i][3] = sqrt((p[i][0] * p[i][0]) + (p[i][1] * p[i][1]) + (p[i][2] * p[i][2]));
+				p[i][3] = sqrt((p[i][0] * p[i][0]) + (p[i][1] * p[i][1]) + (p[i][2] * p[i][2]));		
+			}
+			for (int i = 0; i < 4; i++) {
 				for (int j = 0; j < 4; j++) {
-					p[i][j] = p[i][j] / p[i][3]; // Scale for enregy
+					p[i][j] = p[i][j] / (p[0][3] + p[1][3] + p[2][3] + p[3][3]); // Scale for enregy
 					fileOut << p[i][j] << ' ';
 				}
 			}
+			
 			//toStr(p); // Test print statement
 			fileOut << '\n';
 		}
@@ -163,6 +168,7 @@ double monteCarlo() {
 	return I;
 }
 
+// Main method
 int main()
 {
 	// Take user input on how many times to run the simultion
