@@ -115,10 +115,11 @@ int generatePoints() {
 					p[i][j] = p[i][j] / (p[0][3] + p[1][3] + p[2][3] + p[3][3]); // Scale for enregy
 					fileOut << p[i][j] << ' ';
 				}
+				fileOut << '\n';
 			}
 			
 			//toStr(p); // Test print statement
-			fileOut << '\n';
+			
 		}
 	}
 	fileOut.close();
