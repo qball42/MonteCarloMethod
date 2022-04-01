@@ -116,10 +116,11 @@ int generatePoints() {
 					p[i][j] = p[i][j] / (p0); // Scale for enregy
 					fileOut << p[i][j] << ' ';
 				}
+				fileOut << '\n';
 			}
 			
 			//toStr(p); // Test print statement
-			fileOut << '\n';
+			
 		}
 	}
 	fileOut.close();
