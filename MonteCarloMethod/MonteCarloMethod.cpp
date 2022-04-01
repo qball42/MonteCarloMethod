@@ -99,7 +99,7 @@ int generatePoints() {
 	//loop until 10000 points meeting the criteria are generated
 	int numPoints = 0;
 	double p[4][4]; // p[0,1,2,3][] are the 4 momentum for each outgoing fermion 
-	while (numPoints < 10000) {
+	while (numPoints < 100000) {
 		for (int i = 0; i < 3; i++)
 			for (int j = 0; j < 3; j++)
 				p[i][j] = unif(RNG); // Loop over first 3 fermions and their x,y,z momentum and assign random values on [-1,1]
@@ -110,9 +110,10 @@ int generatePoints() {
 			for (int i = 0; i < 4; i++) {
 				p[i][3] = sqrt((p[i][0] * p[i][0]) + (p[i][1] * p[i][1]) + (p[i][2] * p[i][2]));		
 			}
+			double p0 = p[0][3] + p[1][3] + p[2][3] + p[3][3];
 			for (int i = 0; i < 4; i++) {
 				for (int j = 0; j < 4; j++) {
-					p[i][j] = p[i][j] / (p[0][3] + p[1][3] + p[2][3] + p[3][3]); // Scale for enregy
+					p[i][j] = p[i][j] / (p0); // Scale for enregy
 					fileOut << p[i][j] << ' ';
 				}
 			}
@@ -161,7 +162,7 @@ double monteCarlo() {
 		kB->setE(d + h);
 		I += function(kA, kB);
 	}
-	I /= 10000;
+	I /= 100000;
 	cout << "Integral Result: " << I << endl;
 	
 	fileIn.close();
